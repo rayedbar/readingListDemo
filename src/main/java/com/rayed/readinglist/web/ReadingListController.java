@@ -33,7 +33,6 @@ public class ReadingListController {
     @RequestMapping(value = "/{reader}", method = RequestMethod.GET)
     public String readersBooks(@PathVariable("reader") String reader, Model model) {
         List<Book> readingList = readingListRepository.findByReader(reader);
-
         model.addAttribute("books", readingList);
 
         return "readingList";
@@ -44,7 +43,6 @@ public class ReadingListController {
         log.info("{} added {} to his reading list", reader, book.getTitle());
 
         book.setReader(reader);
-
         readingListRepository.save(book);
 
         return "redirect:/{reader}";
