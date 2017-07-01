@@ -1,10 +1,12 @@
 package com.rayed.readinglist.web;
 
+import com.rayed.readinglist.AmazonProperties;
 import com.rayed.readinglist.domain.Book;
 import com.rayed.readinglist.repository.ReadingListRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,21 +21,26 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/")
+@ConfigurationProperties(prefix = "amazon")
 public class ReadingListController {
 
     private Logger log = LoggerFactory.getLogger(ReadingListController.class);
 
     private ReadingListRepository readingListRepository;
 
+    private AmazonProperties amazonProperties;
+
     @Autowired
-    public ReadingListController(ReadingListRepository readingListRepository) {
+    public ReadingListController(ReadingListRepository readingListRepository, AmazonProperties amazonProperties) {
         this.readingListRepository = readingListRepository;
+        this.amazonProperties = amazonProperties;
     }
 
     @RequestMapping(value = "/{reader}", method = RequestMethod.GET)
     public String readersBooks(@PathVariable("reader") String reader, Model model) {
         List<Book> readingList = readingListRepository.findByReader(reader);
         model.addAttribute("books", readingList);
+        model.addAttribute("associateId", amazonProperties.getAssociateId());
 
         return "readingList";
     }
