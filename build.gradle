@@ -5,12 +5,12 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
-            url 'http://repo.spring.io/plugins-release'
+            url('http://repo.spring.io/plugins-release')
         }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath 'io.spring.gradle:propdeps-plugin:0.0.9.RELEASE'
+        classpath('io.spring.gradle:propdeps-plugin:0.0.9.RELEASE')
     }
 }
 
@@ -41,7 +41,8 @@ dependencies {
     runtime('com.h2database:h2')
 
     // For Configuration Properties
-    optional "org.springframework.boot:spring-boot-configuration-processor"
+    optional('org.springframework.boot:spring-boot-configuration-processor')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
 }
