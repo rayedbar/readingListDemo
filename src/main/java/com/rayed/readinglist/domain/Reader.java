@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
- * Created by rayed on 7/1/17.
+ * @author: rayed
+ * @since: 7/1/17
  */
 @Entity
 public class Reader implements UserDetails {
@@ -24,7 +26,7 @@ public class Reader implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("READER"));
+        return Collections.singletonList(new SimpleGrantedAuthority("READER"));
     }
 
     @Override

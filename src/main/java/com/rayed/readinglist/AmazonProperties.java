@@ -4,7 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by rayed on 7/1/17.
+ * @author: rayed
+ * @since: 7/1/17
  */
 @Component
 @ConfigurationProperties("amazon")

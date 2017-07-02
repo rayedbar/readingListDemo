@@ -39,6 +39,7 @@ public class ReadingListController {
     @RequestMapping(value = "/{reader}", method = RequestMethod.GET)
     public String readersBooks(@PathVariable("reader") String reader, Model model) {
         List<Book> readingList = readingListRepository.findByReader(reader);
+
         model.addAttribute("books", readingList);
         model.addAttribute("associateId", amazonProperties.getAssociateId());
 

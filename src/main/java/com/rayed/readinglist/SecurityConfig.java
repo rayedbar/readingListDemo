@@ -10,14 +10,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * Created by rayed on 7/1/17.
+ * @author: rayed
+ * @since: 7/1/17
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final ReaderRepository readerRepository;
+
     @Autowired
-    private ReaderRepository readerRepository;
+    public SecurityConfig(ReaderRepository readerRepository) {
+        this.readerRepository = readerRepository;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,6 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(username -> readerRepository.findOne(username));
+        auth.userDetailsService(readerRepository::findOne);
     }
 }
